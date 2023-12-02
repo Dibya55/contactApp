@@ -1,0 +1,10 @@
+Components created 
+
+   navbar
+   contact-manager
+   add-contact
+   edit-contact
+   view-contact
+   spinner
+
+   ng g c spinner

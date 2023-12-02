@@ -1,0 +1,88 @@
+<!-- <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin-clockwise" [fullScreen]="true">
+    <p style="color: white"> ..loading </p>
+</ngx-spinner> -->
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin-clockwise" [fullScreen]="true">
+    <p style="color: white">{{contactMsg}} </p>
+</ngx-spinner>
+<div class="container mt-3">
+    <div class="row">
+        <div class="col">
+            <p class="h3 text-danger fw-bold">
+                <a routerLink="/contacts/add" class="btn btn-danger btn-sm">Create New Contact</a>
+            </p>
+            <form action="">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col">
+                                <input type="Submit" class="form-control" [formControl]="myControl"
+                                    placeholder="Search User" type="text">
+                                <mat-autocomplete #auto="matAutocomplete">
+                                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                        {{option}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </div>
+                            <div class="col">
+                                <input class="btn btn-outline-dark" type="submit" value="Search">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Loading Spinner -->
+<ng-container *ngIf="loading">
+    <app-spinner></app-spinner>
+</ng-container>
+
+<!-- Error Message -->
+<ng-container *ngIf="!loading && errorMessage">
+    <div class="container mt-2">
+        <div class="row">
+            <div class="col">
+                <p class="h4 text-danger fw-bold">{{errorMessage}}</p>
+            </div>`
+        </div>
+    </div>
+
+</ng-container>
+
+<!-- Cards -->
+<!-- !loading && contacts.length -->
+<div *ngIf="true" class="container mt-3">
+    <div class="row">
+        <div class="col-md-6 py-1" *ngFor="let contact of contacts">
+            <div class="card list-group-item-danger shadow-lg">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-sm-4">
+                            <img [src]="contact.photo" alt="" class="contact-img">
+                        </div>
+                        <div class="col-sm-7">
+                            <ul class="list-group">
+                                <li class="list-group-item">Name: <span class="fw-bold">{{contact.name}}</span></li>
+                                <li class="list-group-item">Email: <span class="fw-bold">{{contact.email}}</span></li>
+                                <li class="list-group-item">Mobile: <span class="fw-bold">{{contact.mobile}}</span></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-1 align d-flex flex-column align-items-center justify-content-center">
+                            <a click routerLink="/contacts/view/{{contact.id}}" class="btn btn-warning my-1">
+                                <i class="fa fa-eye"></i>
+                            </a>
+                            <a routerLink="/contacts/edit/{{contact.id}}" class="btn btn-primary my-1">
+                                <i class="fas fa-edit" style="color: #121212;"></i>
+                            </a>
+                            <button class="btn btn-danger my-1" (click)="deleteContact(contact?.id)">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

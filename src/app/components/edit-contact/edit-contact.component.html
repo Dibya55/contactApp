@@ -1,0 +1,53 @@
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col">
+            <p class="h3 text-danger">Edit Contact</p>
+        </div>
+
+    </div>
+</div>
+
+<!-- Error Message -->
+<ng-container *ngIf="errorMessage">
+    <div class="container mt-2">
+        <div class="row">
+            <div class="col">
+                <p class="h4 text-danger fw-bold">{{errorMessage}}</p>
+            </div>`
+        </div>
+    </div>
+</ng-container>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <form action="" (submit)="updateContact()">
+                <input type="text" class="form-control my-1" placeholder="Name" name="name" [value]="contact.name"
+                    [(ngModel)]="contact.name">
+                <input type="text" class="form-control my-1" placeholder="Photo Url" [value]="contact.photo"
+                    name="photo" [(ngModel)]="contact.photo">
+                <input type="email" class="form-control my-1" placeholder="Email" [value]="contact.email" name="email"
+                    [(ngModel)]="contact.email">
+                <input type="number" name="number" class="form-control my-1" placeholder="Mobile"
+                    [value]="contact.mobile" name="mobile" [(ngModel)]="contact.mobile">
+                <input type="text" name="company" class="form-control my-1" placeholder="Company"
+                    [value]="contact.company" [(ngModel)]="contact.company">
+                <input type="text" name="title" class="form-control my-1" placeholder="Title"
+                    [(ngModel)]="contact.title" [value]="contact.title">
+                <select class="form-control my-1" name="groupId" [(ngModel)]="contact.groupId"
+                    [value]="contact.groupId">
+                    <option [value]="group.id" *ngFor ="let group of groups">{{group.name}}</option>
+                </select>
+                <!-- <input type="text" name="selectGroup" class="form-control my-1" placeholder="Select Group"> -->
+                <button type="submit" class="btn btn-danger">Update</button>
+                <button routerLink="/contacts/admin" class="btn btn-dark mx-2" type="submit">Back</button>
+            </form>
+
+        </div>
+        <div class="col-sm-4">
+            <img [src]="contact.photo" class="contact-img" alt="">
+        </div>
+
+    </div>
+</div>

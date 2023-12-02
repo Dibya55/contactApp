@@ -1,0 +1,51 @@
+<div class="container mt-3">
+    <div class="row">
+        <div class="col">
+            <p class="h3 text-danger">Add Contact</p>
+        </div>
+    </div>
+</div>
+
+<!-- Error Message -->
+<ng-container *ngIf="errorMessage">
+    <div class="container mt-2">
+        <div class="row">
+            <div class="col">
+                <p class="h4 text-danger fw-bold">{{errorMessage}}</p>
+            </div>`
+        </div>
+    </div>
+</ng-container>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <label for="">All fields are mandatory.</label>
+            <form #addContactForm="ngForm" (submit)="createSubmit(addContactForm)" action=""  novalidate>
+                <input type="text" class="form-control my-1" placeholder="Name" name="name"  [(ngModel)]="contact.name"
+                    required="true">
+                <input type="text" class="form-control my-1" placeholder="Photo Url" name="photo"
+                    [(ngModel)]="contact.photo"   required="true">
+                <input type="email" class="form-control my-1" placeholder="Email" name="email"
+                    [(ngModel)]="contact.email"  required="true">
+                <input type="number" name="mobile" class="form-control my-1" placeholder="Mobile"
+                    [(ngModel)]="contact.mobile" required="true">
+                <input type="text" name="company" class="form-control my-1" placeholder="Company"
+                    [(ngModel)]="contact.company"   required="true">
+                <input type="text" name="title" class="form-control my-1" placeholder="Title"
+                    [(ngModel)]="contact.title" required="true">
+                <select class="form-control my-1" name="groupId"  [(ngModel)]="selectedGroupId" *ngIf="groups.length>0">
+                    <option  [ngValue]="null">Select a Group</option>
+                    <option [value]="group.id" *ngFor="let group of groups">
+                        {{group.name}}</option>
+                </select>
+                <button type="submit" class="btn btn-danger"  [disabled] ="!addContactForm.valid">Create</button>
+                <button routerLink="/contacts/admin" class="btn btn-dark mx-2" type="submit">Back</button>
+            </form>
+        </div>
+
+        <div class="col-sm-4">
+            <img [src]="contact.photo" class="contact-img" alt="">
+        </div>
+    </div>
+</div>
